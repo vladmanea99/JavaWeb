@@ -1,0 +1,70 @@
+openapi: "3.0.0"
+info:
+  title: PetCare Service
+  description: Implementation of PetCare
+  version: 0.1.0
+paths:
+  /pets:
+    get:
+      summary: List all pets
+      operationId: listPets
+      tags:
+        - pets
+      parameters:
+        - name: limit
+          in: query
+          description: Limit of items in list
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 5
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
+                example:
+                  - id: 1
+                    name: "Rex"
+                    breedId: 1
+                    ownerId: 1
+                  - id: 2
+                    name: "Max"
+                    breedId: 2
+                    ownerId: 1
+                  - id: 3
+                    name: "Aron"
+                    breedId: 3
+                    ownerId: 2
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+
+
+components:
+  schemas:
+    Pet:
+      type: object
+      required:
+        - id
+        - name
+        - breedId
+        - ownerId
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        breedId:
+          type: integer
+          format: int64
+        ownerId:
+          type: integer
+          format: int64
