@@ -21,7 +21,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-16T20:20:03.615686600+02:00[Europe/Bucharest]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-16T20:38:11.241057500+02:00[Europe/Bucharest]")
 @Validated
 @Api(value = "pets", description = "the pets API")
 public interface PetsApi {
@@ -51,7 +51,7 @@ public interface PetsApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"id\" : 1, \"name\" : \"Rex\", \"breedId\" : 1, \"ownerId\" : 1 }, { \"id\" : 2, \"name\" : \"Max\", \"breedId\" : 2, \"ownerId\" : 1 }, { \"id\" : 3, \"name\" : \"Aron\", \"breedId\" : 3, \"ownerId\" : 2 } ]";
+                    String exampleString = "{ \"owner\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }, \"name\" : \"Aron\", \"id\" : 1, \"breed\" : { \"name\" : \"rottweiler\", \"description\" : \"Dog breed black and brown, seems vicious but are the best cuddlers\", \"id\" : 1 } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
