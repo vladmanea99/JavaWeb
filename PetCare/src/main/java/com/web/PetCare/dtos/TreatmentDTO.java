@@ -3,8 +3,6 @@ package com.web.PetCare.dtos;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.web.PetCare.dtos.BreedDTO;
-import com.web.PetCare.dtos.OwnerDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -12,23 +10,20 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * PetDTO
+ * TreatmentDTO
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-16T20:20:03.615686600+02:00[Europe/Bucharest]")
-public class PetDTO   {
+public class TreatmentDTO   {
   @JsonProperty("id")
   private Long id;
 
   @JsonProperty("name")
   private String name;
 
-  @JsonProperty("breed")
-  private BreedDTO breed;
+  @JsonProperty("description")
+  private String description;
 
-  @JsonProperty("owner")
-  private OwnerDTO owner;
-
-  public PetDTO id(Long id) {
+  public TreatmentDTO id(Long id) {
     this.id = id;
     return this;
   }
@@ -49,7 +44,7 @@ public class PetDTO   {
     this.id = id;
   }
 
-  public PetDTO name(String name) {
+  public TreatmentDTO name(String name) {
     this.name = name;
     return this;
   }
@@ -58,7 +53,7 @@ public class PetDTO   {
    * Get name
    * @return name
   */
-  @ApiModelProperty(example = "Aron", required = true, value = "")
+  @ApiModelProperty(example = "Returning to normal nails", required = true, value = "")
   @NotNull
 
 
@@ -70,48 +65,24 @@ public class PetDTO   {
     this.name = name;
   }
 
-  public PetDTO breed(BreedDTO breed) {
-    this.breed = breed;
+  public TreatmentDTO description(String description) {
+    this.description = description;
     return this;
   }
 
   /**
-   * Get breed
-   * @return breed
+   * Get description
+   * @return description
   */
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
+  @ApiModelProperty(example = "Long treatment of cutting nails little by little", value = "")
 
-  @Valid
 
-  public BreedDTO getBreed() {
-    return breed;
+  public String getDescription() {
+    return description;
   }
 
-  public void setBreed(BreedDTO breed) {
-    this.breed = breed;
-  }
-
-  public PetDTO owner(OwnerDTO owner) {
-    this.owner = owner;
-    return this;
-  }
-
-  /**
-   * Get owner
-   * @return owner
-  */
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
-
-  @Valid
-
-  public OwnerDTO getOwner() {
-    return owner;
-  }
-
-  public void setOwner(OwnerDTO owner) {
-    this.owner = owner;
+  public void setDescription(String description) {
+    this.description = description;
   }
 
 
@@ -123,27 +94,25 @@ public class PetDTO   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PetDTO pet = (PetDTO) o;
-    return Objects.equals(this.id, pet.id) &&
-        Objects.equals(this.name, pet.name) &&
-        Objects.equals(this.breed, pet.breed) &&
-        Objects.equals(this.owner, pet.owner);
+    TreatmentDTO treatment = (TreatmentDTO) o;
+    return Objects.equals(this.id, treatment.id) &&
+        Objects.equals(this.name, treatment.name) &&
+        Objects.equals(this.description, treatment.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, breed, owner);
+    return Objects.hash(id, name, description);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PetDTO {\n");
+    sb.append("class TreatmentDTO {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    breed: ").append(toIndentedString(breed)).append("\n");
-    sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("}");
     return sb.toString();
   }

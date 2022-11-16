@@ -46,7 +46,6 @@ paths:
         404:
           description: Not Found
 
-
 components:
   schemas:
     Pet:
@@ -54,17 +53,106 @@ components:
       required:
         - id
         - name
-        - breedId
-        - ownerId
+        - breed
+        - owner
       properties:
         id:
           type: integer
+          example: 1
           format: int64
         name:
           type: string
-        breedId:
+          example: "Aron"
+        breed:
+          $ref: "#/components/schemas/Breed"
+        owner:
+          $ref: "#/components/schemas/Owner"
+    Owner:
+      type: object
+      required:
+        - id
+        - lastName
+        - firstName
+      properties:
+        id:
           type: integer
+          example: 1
           format: int64
-        ownerId:
+        firstName:
+          type: string
+          example: "John"
+        lastName:
+          type: string
+          example: "Doe"
+    Breed:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
           type: integer
+          example: 1
           format: int64
+        name:
+          type: string
+          example: "rottweiler"
+        description:
+          example: "Dog breed black and brown, seems vicious but are the best cuddlers"
+          type: string
+    Treatment:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          example: 1
+          format: int64
+        name:
+          type: string
+          example: "Returning to normal nails"
+        description:
+          example: "Long treatment of cutting nails little by little"
+          type: string
+    Session:
+      type: object
+      required:
+        - id
+        - pet
+        - treatment
+        - sessionDate
+      properties:
+        id:
+          type: integer
+          example: 1
+          format: int64
+        sessionDate:
+          type: string
+          example: "2022-11-16T20:15:23"
+          format: date-time
+        pet:
+          $ref: "#/components/schemas/Pet"
+        treatment:
+          $ref: "#/components/schemas/Treatment"
+    Payment:
+      type: object
+      required:
+        - id
+        - session
+        - owner
+        - paymentDate
+      properties:
+        id:
+          type: integer
+          example: 1
+          format: int64
+        session:
+          $ref: "#/components/schemas/Session"
+        owner:
+          $ref: "#/components/schemas/Owner"
+        paymentDate:
+          type: string
+          example: "2022-11-16T22:20:13"
+          format: date-time

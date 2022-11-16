@@ -3,32 +3,34 @@ package com.web.PetCare.dtos;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.web.PetCare.dtos.BreedDTO;
 import com.web.PetCare.dtos.OwnerDTO;
+import com.web.PetCare.dtos.SessionDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.time.OffsetDateTime;
 import org.openapitools.jackson.nullable.JsonNullable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * PetDTO
+ * PaymentDTO
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-16T20:20:03.615686600+02:00[Europe/Bucharest]")
-public class PetDTO   {
+public class PaymentDTO   {
   @JsonProperty("id")
   private Long id;
 
-  @JsonProperty("name")
-  private String name;
-
-  @JsonProperty("breed")
-  private BreedDTO breed;
+  @JsonProperty("session")
+  private SessionDTO session;
 
   @JsonProperty("owner")
   private OwnerDTO owner;
 
-  public PetDTO id(Long id) {
+  @JsonProperty("paymentDate")
+  @org.springframework.format.annotation.DateTimeFormat(iso = org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime paymentDate;
+
+  public PaymentDTO id(Long id) {
     this.id = id;
     return this;
   }
@@ -49,50 +51,29 @@ public class PetDTO   {
     this.id = id;
   }
 
-  public PetDTO name(String name) {
-    this.name = name;
+  public PaymentDTO session(SessionDTO session) {
+    this.session = session;
     return this;
   }
 
   /**
-   * Get name
-   * @return name
-  */
-  @ApiModelProperty(example = "Aron", required = true, value = "")
-  @NotNull
-
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public PetDTO breed(BreedDTO breed) {
-    this.breed = breed;
-    return this;
-  }
-
-  /**
-   * Get breed
-   * @return breed
+   * Get session
+   * @return session
   */
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
   @Valid
 
-  public BreedDTO getBreed() {
-    return breed;
+  public SessionDTO getSession() {
+    return session;
   }
 
-  public void setBreed(BreedDTO breed) {
-    this.breed = breed;
+  public void setSession(SessionDTO session) {
+    this.session = session;
   }
 
-  public PetDTO owner(OwnerDTO owner) {
+  public PaymentDTO owner(OwnerDTO owner) {
     this.owner = owner;
     return this;
   }
@@ -114,6 +95,28 @@ public class PetDTO   {
     this.owner = owner;
   }
 
+  public PaymentDTO paymentDate(OffsetDateTime paymentDate) {
+    this.paymentDate = paymentDate;
+    return this;
+  }
+
+  /**
+   * Get paymentDate
+   * @return paymentDate
+  */
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+  @Valid
+
+  public OffsetDateTime getPaymentDate() {
+    return paymentDate;
+  }
+
+  public void setPaymentDate(OffsetDateTime paymentDate) {
+    this.paymentDate = paymentDate;
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -123,27 +126,27 @@ public class PetDTO   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PetDTO pet = (PetDTO) o;
-    return Objects.equals(this.id, pet.id) &&
-        Objects.equals(this.name, pet.name) &&
-        Objects.equals(this.breed, pet.breed) &&
-        Objects.equals(this.owner, pet.owner);
+    PaymentDTO payment = (PaymentDTO) o;
+    return Objects.equals(this.id, payment.id) &&
+        Objects.equals(this.session, payment.session) &&
+        Objects.equals(this.owner, payment.owner) &&
+        Objects.equals(this.paymentDate, payment.paymentDate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, breed, owner);
+    return Objects.hash(id, session, owner, paymentDate);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PetDTO {\n");
+    sb.append("class PaymentDTO {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    breed: ").append(toIndentedString(breed)).append("\n");
+    sb.append("    session: ").append(toIndentedString(session)).append("\n");
     sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
+    sb.append("    paymentDate: ").append(toIndentedString(paymentDate)).append("\n");
     sb.append("}");
     return sb.toString();
   }
