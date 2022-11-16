@@ -28,19 +28,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Pet"
-                example:
-                  - id: 1
-                    name: "Rex"
-                    breedId: 1
-                    ownerId: 1
-                  - id: 2
-                    name: "Max"
-                    breedId: 2
-                    ownerId: 1
-                  - id: 3
-                    name: "Aron"
-                    breedId: 3
-                    ownerId: 2
         400:
           description: Bad Request
         404:
