@@ -21,7 +21,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-16T20:38:11.241057500+02:00[Europe/Bucharest]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-24T11:53:28.645693600+02:00[Europe/Bucharest]")
 @Validated
 @Api(value = "pets", description = "the pets API")
 public interface PetsApi {
@@ -31,23 +31,23 @@ public interface PetsApi {
     }
 
     /**
-     * GET /pets : List all pets
+     * GET /pets/getPets : List all pets
      *
      * @param limit Limit of items in list (required)
      * @return Successful operation (status code 200)
      *         or Bad Request (status code 400)
      *         or Not Found (status code 404)
      */
-    @ApiOperation(value = "List all pets", nickname = "listPets", notes = "", response = PetDTO.class, responseContainer = "List", tags={ "pets", })
+    @ApiOperation(value = "List all pets", nickname = "getPets", notes = "", response = PetDTO.class, responseContainer = "List", tags={ "Pets", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Successful operation", response = PetDTO.class, responseContainer = "List"),
         @ApiResponse(code = 400, message = "Bad Request"),
         @ApiResponse(code = 404, message = "Not Found") })
     @GetMapping(
-        value = "/pets",
+        value = "/pets/getPets",
         produces = { "application/json" }
     )
-    default ResponseEntity<List<PetDTO>> listPets(@NotNull @ApiParam(value = "Limit of items in list", required = true) @Valid @RequestParam(value = "limit", required = true) Long limit) {
+    default ResponseEntity<List<PetDTO>> getPets(@NotNull @ApiParam(value = "Limit of items in list", required = true) @Valid @RequestParam(value = "limit", required = true) Long limit) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
