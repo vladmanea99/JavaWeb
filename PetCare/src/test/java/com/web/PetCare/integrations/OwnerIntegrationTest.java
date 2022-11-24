@@ -64,7 +64,7 @@ public class OwnerIntegrationTest {
         final MvcResult mvcResult = mockMvc.perform(getAllOwners).andExpect(status().isOk()).andReturn();
         final List<OwnerDTO> actualOwnerDtoList = Arrays.asList(objectMapper.readValue(mvcResult.getResponse().getContentAsString(), OwnerDTO[].class));
 
-        assertTrue(!actualOwnerDtoList.isEmpty());
+        assertFalse(actualOwnerDtoList.isEmpty());
     }
 
     @Disabled
