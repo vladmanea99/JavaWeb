@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class OwnerService {
 
-    @Autowired
     OwnerMapper ownerMapper;
+
+    @Autowired
+    public OwnerService(final OwnerMapper ownerMapper) {
+        this.ownerMapper = ownerMapper;
+    }
 
     public List<OwnerDTO> getOwners() {
         OwnerDTO ownerDTO1 = new OwnerDTO();

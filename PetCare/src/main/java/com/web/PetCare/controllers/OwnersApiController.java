@@ -20,12 +20,12 @@ public class OwnersApiController implements OwnersApi {
 
     private final NativeWebRequest request;
 
-    @Autowired
     private OwnerService ownerService;
 
     @org.springframework.beans.factory.annotation.Autowired
-    public OwnersApiController(NativeWebRequest request) {
+    public OwnersApiController(NativeWebRequest request, OwnerService ownerService) {
         this.request = request;
+        this.ownerService = ownerService;
     }
 
     @Override
