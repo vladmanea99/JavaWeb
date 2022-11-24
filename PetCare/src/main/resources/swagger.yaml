@@ -4,12 +4,12 @@ info:
   description: Implementation of PetCare
   version: 0.1.0
 paths:
-  /pets:
+  /pets/getPets:
     get:
       summary: List all pets
-      operationId: listPets
+      operationId: getPets
       tags:
-        - pets
+        - Pets
       parameters:
         - name: limit
           in: query
@@ -32,7 +32,47 @@ paths:
           description: Bad Request
         404:
           description: Not Found
-
+  /owners/getOwners:
+    get:
+      summary: List all owners
+      operationId: getOwners
+      tags:
+        - Owners
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Owner"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /owners/createOwner:
+   post:
+      summary: Create an owner
+      operationId: createOwner
+      requestBody:
+        description: Create an owner
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Owner"
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Owner"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
 components:
   schemas:
     Pet:
@@ -57,7 +97,6 @@ components:
     Owner:
       type: object
       required:
-        - id
         - lastName
         - firstName
       properties:
