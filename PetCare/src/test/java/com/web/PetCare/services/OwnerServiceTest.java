@@ -35,7 +35,7 @@ public class OwnerServiceTest {
     }
 
     @Test
-    public void getAllOwners() {
+    public void getAllOwnersTest() {
         final List<OwnerDTO> ownerDTOList = OWNER_DTO_LIST;
         final List<Owner> ownerList = OWNER_LIST;
 

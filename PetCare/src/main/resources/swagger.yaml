@@ -73,6 +73,47 @@ paths:
           description: Bad Request
         404:
           description: Not Found
+  /breeds/getBreeds:
+    get:
+      summary: List all breeds
+      operationId: getBreeds
+      tags:
+        - Breeds
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Breed"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /breeds/createBreed:
+    post:
+      summary: Create a breed
+      operationId: createBreed
+      requestBody:
+        description: Create a breed
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Breed"
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Breed"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
 components:
   schemas:
     Pet:
@@ -113,7 +154,6 @@ components:
     Breed:
       type: object
       required:
-        - id
         - name
       properties:
         id:
