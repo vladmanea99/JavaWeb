@@ -32,7 +32,7 @@ paths:
           description: Bad Request
         404:
           description: Not Found
-  /owners/getOwners:
+  /owners/owner:
     get:
       summary: List all owners
       operationId: getOwners
@@ -51,8 +51,7 @@ paths:
           description: Bad Request
         404:
           description: Not Found
-  /owners/createOwner:
-   post:
+    post:
       summary: Create an owner
       operationId: createOwner
       requestBody:
@@ -73,7 +72,7 @@ paths:
           description: Bad Request
         404:
           description: Not Found
-  /breeds/getBreeds:
+  /breeds/breed:
     get:
       summary: List all breeds
       operationId: getBreeds
@@ -92,7 +91,6 @@ paths:
           description: Bad Request
         404:
           description: Not Found
-  /breeds/createBreed:
     post:
       summary: Create a breed
       operationId: createBreed
@@ -119,7 +117,6 @@ components:
     Pet:
       type: object
       required:
-        - id
         - name
         - breed
         - owner
@@ -169,7 +166,6 @@ components:
     Treatment:
       type: object
       required:
-        - id
         - name
       properties:
         id:
@@ -185,7 +181,6 @@ components:
     Session:
       type: object
       required:
-        - id
         - pet
         - treatment
         - sessionDate
@@ -205,7 +200,6 @@ components:
     Payment:
       type: object
       required:
-        - id
         - session
         - owner
         - paymentDate

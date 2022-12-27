@@ -21,7 +21,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-24T11:53:28.645693600+02:00[Europe/Bucharest]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-12-28T00:31:49.697529800+02:00[Europe/Bucharest]")
 @Validated
 @Api(value = "owners", description = "the owners API")
 public interface OwnersApi {
@@ -31,7 +31,7 @@ public interface OwnersApi {
     }
 
     /**
-     * POST /owners/createOwner : Create an owner
+     * POST /owners/owner : Create an owner
      *
      * @param ownerDTO Create an owner (required)
      * @return Successful operation (status code 201)
@@ -44,7 +44,7 @@ public interface OwnersApi {
         @ApiResponse(code = 400, message = "Bad Request"),
         @ApiResponse(code = 404, message = "Not Found") })
     @PostMapping(
-        value = "/owners/createOwner",
+        value = "/owners/owner",
         produces = { "application/json" },
         consumes = { "application/json" }
     )
@@ -64,7 +64,7 @@ public interface OwnersApi {
 
 
     /**
-     * GET /owners/getOwners : List all owners
+     * GET /owners/owner : List all owners
      *
      * @return Successful operation (status code 200)
      *         or Bad Request (status code 400)
@@ -76,7 +76,7 @@ public interface OwnersApi {
         @ApiResponse(code = 400, message = "Bad Request"),
         @ApiResponse(code = 404, message = "Not Found") })
     @GetMapping(
-        value = "/owners/getOwners",
+        value = "/owners/owner",
         produces = { "application/json" }
     )
     default ResponseEntity<List<OwnerDTO>> getOwners() {

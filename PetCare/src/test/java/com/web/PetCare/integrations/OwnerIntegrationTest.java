@@ -34,8 +34,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class OwnerIntegrationTest {
     private String host = "http://localhost";
 
-    private static final String REQUEST_PATH_GET_OWNERS = "%s/owners/getOwners";
-    private static final String REQUEST_PATH_CREATE_OWNER = "%s/owners/createOwner";
+    private static final String REQUEST_PATH_GET_OWNERS = "%s/owners/owner";
+    private static final String REQUEST_PATH_CREATE_OWNER = "%s/owners/owner";
 
     @LocalServerPort
     private String port;

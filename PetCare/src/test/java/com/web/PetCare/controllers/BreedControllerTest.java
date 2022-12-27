@@ -45,7 +45,7 @@ public class BreedControllerTest {
     public void getListOfBreeds() throws Exception {
         when(breedService.getBreeds()).thenReturn(BREED_DTO_LIST);
 
-        final MvcResult mvcResult = mockMvc.perform(get("/breeds/getBreeds"))
+        final MvcResult mvcResult = mockMvc.perform(get("/breeds/breed"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -62,7 +62,7 @@ public class BreedControllerTest {
 
         String breedDtoStr = objectMapper.writeValueAsString(breedDTO);
 
-        RequestBuilder postEvent = post("/breeds/createBreed")
+        RequestBuilder postEvent = post("/breeds/breed")
                 .accept(MediaType.APPLICATION_JSON)
                 .content(breedDtoStr)
                 .contentType(MediaType.APPLICATION_JSON);
