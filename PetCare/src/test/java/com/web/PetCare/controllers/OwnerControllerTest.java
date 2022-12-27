@@ -45,7 +45,7 @@ public class OwnerControllerTest {
     public void getListOfOwners() throws Exception {
         when(ownerService.getOwners()).thenReturn(OWNER_DTO_LIST);
 
-        final MvcResult mvcResult = mockMvc.perform(get("/owners/getOwners"))
+        final MvcResult mvcResult = mockMvc.perform(get("/owners/owner"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -62,7 +62,7 @@ public class OwnerControllerTest {
 
         String ownerDtoStr = objectMapper.writeValueAsString(ownerDTO);
 
-        RequestBuilder postEvent = post("/owners/createOwner")
+        RequestBuilder postEvent = post("/owners/owner")
                 .accept(MediaType.APPLICATION_JSON)
                 .content(ownerDtoStr)
                 .contentType(MediaType.APPLICATION_JSON);
@@ -82,7 +82,7 @@ public class OwnerControllerTest {
 
         String ownerDtoStr = objectMapper.writeValueAsString(ownerDTO);
 
-        RequestBuilder postEvent = post("/owners/createOwner")
+        RequestBuilder postEvent = post("/owners/owner")
                 .accept(MediaType.APPLICATION_JSON)
                 .content(ownerDtoStr)
                 .contentType(MediaType.APPLICATION_JSON);

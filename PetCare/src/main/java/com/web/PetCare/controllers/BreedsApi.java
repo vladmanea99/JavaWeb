@@ -21,7 +21,7 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-26T10:58:47.748312900+02:00[Europe/Bucharest]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-12-28T00:31:49.697529800+02:00[Europe/Bucharest]")
 @Validated
 @Api(value = "breeds", description = "the breeds API")
 public interface BreedsApi {
@@ -31,7 +31,7 @@ public interface BreedsApi {
     }
 
     /**
-     * POST /breeds/createBreed : Create a breed
+     * POST /breeds/breed : Create a breed
      *
      * @param breedDTO Create a breed (required)
      * @return Successful operation (status code 201)
@@ -44,7 +44,7 @@ public interface BreedsApi {
         @ApiResponse(code = 400, message = "Bad Request"),
         @ApiResponse(code = 404, message = "Not Found") })
     @PostMapping(
-        value = "/breeds/createBreed",
+        value = "/breeds/breed",
         produces = { "application/json" },
         consumes = { "application/json" }
     )
@@ -64,7 +64,7 @@ public interface BreedsApi {
 
 
     /**
-     * GET /breeds/getBreeds : List all breeds
+     * GET /breeds/breed : List all breeds
      *
      * @return Successful operation (status code 200)
      *         or Bad Request (status code 400)
@@ -76,7 +76,7 @@ public interface BreedsApi {
         @ApiResponse(code = 400, message = "Bad Request"),
         @ApiResponse(code = 404, message = "Not Found") })
     @GetMapping(
-        value = "/breeds/getBreeds",
+        value = "/breeds/breed",
         produces = { "application/json" }
     )
     default ResponseEntity<List<BreedDTO>> getBreeds() {
