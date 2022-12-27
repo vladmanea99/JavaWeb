@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
 /**
  * BreedDTO
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-16T20:20:03.615686600+02:00[Europe/Bucharest]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-26T10:58:47.748312900+02:00[Europe/Bucharest]")
 public class BreedDTO   {
   @JsonProperty("id")
   private Long id;
@@ -32,8 +32,7 @@ public class BreedDTO   {
    * Get id
    * @return id
   */
-  @ApiModelProperty(example = "1", required = true, value = "")
-  @NotNull
+  @ApiModelProperty(example = "1", value = "")
 
 
   public Long getId() {
