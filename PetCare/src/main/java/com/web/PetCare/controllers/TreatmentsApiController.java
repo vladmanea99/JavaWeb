@@ -31,10 +31,12 @@ public class TreatmentsApiController implements TreatmentsApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
     public ResponseEntity<List<TreatmentDTO>> getTreatments() {
         return ResponseEntity.status(HttpStatus.OK).body(treatmentService.getTreatments());
     }
 
+    @Override
     public ResponseEntity<TreatmentDTO> createTreatment(@Valid TreatmentDTO treatmentDTO) {
         TreatmentDTO savedTreatmentDto = treatmentService.createTreatment(treatmentDTO);
         return new ResponseEntity<>(savedTreatmentDto, HttpStatus.CREATED);
