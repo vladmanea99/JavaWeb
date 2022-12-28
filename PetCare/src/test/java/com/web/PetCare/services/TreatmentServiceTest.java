@@ -71,12 +71,12 @@ public class TreatmentServiceTest {
         when(treatmentRepository.saveAndFlush((any()))).thenReturn(exitTreatment);
         when(treatmentMapper.treatmentToTreatmentDto(any())).thenReturn(exitTreatmentDto);
 
-        final TreatmentDTO actualtTreatmentDto = treatmentService.createTreatment(entryTreatmentDto);
+        final TreatmentDTO actualTreatmentDto = treatmentService.createTreatment(entryTreatmentDto);
 
-        assertNotNull(actualtTreatmentDto);
-        assertEquals(exitTreatmentDto.getId(), actualtTreatmentDto.getId());
-        assertEquals(exitTreatmentDto.getName(), actualtTreatmentDto.getName());
-        assertEquals(exitTreatmentDto.getDescription(), actualtTreatmentDto.getDescription());
+        assertNotNull(actualTreatmentDto);
+        assertEquals(exitTreatmentDto.getId(), actualTreatmentDto.getId());
+        assertEquals(exitTreatmentDto.getName(), actualTreatmentDto.getName());
+        assertEquals(exitTreatmentDto.getDescription(), actualTreatmentDto.getDescription());
     }
 
     private static final List<TreatmentDTO> TREATMENT_DTO_LIST = ImmutableList.of(

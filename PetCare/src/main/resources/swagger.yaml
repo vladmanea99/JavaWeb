@@ -164,6 +164,46 @@ paths:
           description: Bad Request
         404:
           description: Not Found
+  /sessions/session:
+    get:
+      summary: List all sessions
+      operationId: getSessions
+      tags:
+        - Sessions
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Session"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+    post:
+      summary: Create a sessions
+      operationId: createSession
+      requestBody:
+        description: Create a session
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Session"
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Session"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
 components:
   schemas:
     Pet:
