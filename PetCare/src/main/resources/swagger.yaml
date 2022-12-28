@@ -4,21 +4,12 @@ info:
   description: Implementation of PetCare
   version: 0.1.0
 paths:
-  /pets/getPets:
+  /pets/pet:
     get:
       summary: List all pets
       operationId: getPets
       tags:
         - Pets
-      parameters:
-        - name: limit
-          in: query
-          description: Limit of items in list
-          required: true
-          schema:
-            type: integer
-            format: int64
-            example: 5
       responses:
         200:
           description: Successful operation
@@ -28,6 +19,27 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Pet"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+    post:
+      summary: Create a pet
+      operationId: createPet
+      requestBody:
+        description: Create a pet
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pet"
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pet"
         400:
           description: Bad Request
         404:

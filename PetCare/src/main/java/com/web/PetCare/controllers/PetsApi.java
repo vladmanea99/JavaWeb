@@ -11,17 +11,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.multipart.MultipartFile;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-12-28T00:31:49.697529800+02:00[Europe/Bucharest]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-12-28T13:47:20.683681200+02:00[Europe/Bucharest]")
 @Validated
 @Api(value = "pets", description = "the pets API")
 public interface PetsApi {
@@ -31,9 +29,41 @@ public interface PetsApi {
     }
 
     /**
-     * GET /pets/getPets : List all pets
+     * POST /pets/pet : Create a pet
      *
-     * @param limit Limit of items in list (required)
+     * @param petDTO Create a pet (required)
+     * @return Successful operation (status code 201)
+     *         or Bad Request (status code 400)
+     *         or Not Found (status code 404)
+     */
+    @ApiOperation(value = "Create a pet", nickname = "createPet", notes = "", response = PetDTO.class, tags={  })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 201, message = "Successful operation", response = PetDTO.class),
+        @ApiResponse(code = 400, message = "Bad Request"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @PostMapping(
+        value = "/pets/pet",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    default ResponseEntity<PetDTO> createPet(@ApiParam(value = "Create a pet" ,required=true )  @Valid @RequestBody PetDTO petDTO) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"owner\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }, \"name\" : \"Aron\", \"id\" : 1, \"breed\" : { \"name\" : \"rottweiler\", \"description\" : \"Dog breed black and brown, seems vicious but are the best cuddlers\", \"id\" : 1 } }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /pets/pet : List all pets
+     *
      * @return Successful operation (status code 200)
      *         or Bad Request (status code 400)
      *         or Not Found (status code 404)
@@ -44,10 +74,10 @@ public interface PetsApi {
         @ApiResponse(code = 400, message = "Bad Request"),
         @ApiResponse(code = 404, message = "Not Found") })
     @GetMapping(
-        value = "/pets/getPets",
+        value = "/pets/pet",
         produces = { "application/json" }
     )
-    default ResponseEntity<List<PetDTO>> getPets(@NotNull @ApiParam(value = "Limit of items in list", required = true) @Valid @RequestParam(value = "limit", required = true) Long limit) {
+    default ResponseEntity<List<PetDTO>> getPets() {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {

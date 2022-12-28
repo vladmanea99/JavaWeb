@@ -28,7 +28,7 @@ public class BreedRepositoryTest {
 
     @Test
     public void createBreedTest() {
-        Breed breed = new Breed(null, "rottweiler", "Very friendly breed");
+        Breed breed = new Breed(null, "Saint Bernard", "Very friendly breed");
         Breed savedBreed = breedRepository.saveAndFlush(breed);
         assertNotNull(savedBreed);
         assertNotNull(savedBreed.getId());
