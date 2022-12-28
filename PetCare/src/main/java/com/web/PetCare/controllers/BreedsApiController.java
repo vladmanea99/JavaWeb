@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-26T10:58:47.748312900+02:00[Europe/Bucharest]")
@@ -37,7 +38,7 @@ public class BreedsApiController implements BreedsApi {
     }
 
     @Override
-    public ResponseEntity<BreedDTO> createBreed(BreedDTO breedDto) {
+    public ResponseEntity<BreedDTO> createBreed(@Valid BreedDTO breedDto) {
         BreedDTO savedBreedDto = breedService.createBreed(breedDto);
         return new ResponseEntity<>(savedBreedDto, HttpStatus.CREATED);
     }

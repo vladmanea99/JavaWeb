@@ -72,6 +72,46 @@ paths:
           description: Bad Request
         404:
           description: Not Found
+  /treatments/treatment:
+    get:
+      summary: List all treatments
+      operationId: getTreatments
+      tags:
+        - Treatments
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Treatment"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+    post:
+      summary: Create an treatment
+      operationId: createTreatment
+      requestBody:
+        description: Create an treatment
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Treatment"
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Treatment"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
   /breeds/breed:
     get:
       summary: List all breeds
