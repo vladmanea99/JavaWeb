@@ -37,6 +37,7 @@ public class SessionsApiController implements SessionsApi {
         return ResponseEntity.status(HttpStatus.OK).body(sessionDTOS);
     }
 
+    @Override
     public ResponseEntity<SessionDTO> createSession(@Valid SessionDTO sessionDTO) {
         SessionDTO savedSessionDto = sessionService.createSession(sessionDTO);
         return new ResponseEntity<>(savedSessionDto, HttpStatus.CREATED);
