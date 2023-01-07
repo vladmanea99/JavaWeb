@@ -1,24 +1,23 @@
 package com.web.PetCare.dtos;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.web.PetCare.dtos.OwnerDTO;
-import com.web.PetCare.dtos.SessionDTO;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.time.OffsetDateTime;
-import org.openapitools.jackson.nullable.JsonNullable;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import java.time.OffsetDateTime;
+import java.util.Objects;
 
 /**
  * PaymentDTO
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-12-28T00:31:49.697529800+02:00[Europe/Bucharest]")
-public class PaymentDTO   {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-01-07T11:56:57.209576500+02:00[Europe/Bucharest]")
+public class PaymentDTO {
   @JsonProperty("id")
   private Long id;
+
+  @JsonProperty("amount")
+  private Integer amount;
 
   @JsonProperty("session")
   private SessionDTO session;
@@ -48,6 +47,27 @@ public class PaymentDTO   {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public PaymentDTO amount(Integer amount) {
+    this.amount = amount;
+    return this;
+  }
+
+  /**
+   * Get amount
+   * @return amount
+  */
+  @ApiModelProperty(example = "1", required = true, value = "")
+  @NotNull
+
+
+  public Integer getAmount() {
+    return amount;
+  }
+
+  public void setAmount(Integer amount) {
+    this.amount = amount;
   }
 
   public PaymentDTO session(SessionDTO session) {
@@ -127,6 +147,7 @@ public class PaymentDTO   {
     }
     PaymentDTO payment = (PaymentDTO) o;
     return Objects.equals(this.id, payment.id) &&
+        Objects.equals(this.amount, payment.amount) &&
         Objects.equals(this.session, payment.session) &&
         Objects.equals(this.owner, payment.owner) &&
         Objects.equals(this.paymentDate, payment.paymentDate);
@@ -134,7 +155,7 @@ public class PaymentDTO   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, session, owner, paymentDate);
+    return Objects.hash(id, amount, session, owner, paymentDate);
   }
 
   @Override
@@ -143,6 +164,7 @@ public class PaymentDTO   {
     sb.append("class PaymentDTO {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    session: ").append(toIndentedString(session)).append("\n");
     sb.append("    owner: ").append(toIndentedString(owner)).append("\n");
     sb.append("    paymentDate: ").append(toIndentedString(paymentDate)).append("\n");

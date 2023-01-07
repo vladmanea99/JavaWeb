@@ -204,6 +204,46 @@ paths:
           description: Bad Request
         404:
           description: Not Found
+  /payments/payment:
+    get:
+      summary: List all payments
+      operationId: getPayments
+      tags:
+        - Payments
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Payment"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+    post:
+      summary: Create a payment
+      operationId: createPayment
+      requestBody:
+        description: Create a payment
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Payment"
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Payment"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
 components:
   schemas:
     Pet:
@@ -295,11 +335,15 @@ components:
         - session
         - owner
         - paymentDate
+        - amount
       properties:
         id:
           type: integer
           example: 1
           format: int64
+        amount:
+          type: integer
+          example: 1
         session:
           $ref: "#/components/schemas/Session"
         owner:
