@@ -32,4 +32,8 @@ public class BreedService {
         Breed savedBreed = breedRepository.saveAndFlush(breedMapper.breedDtoToBreed(breedDTO));
         return breedMapper.breedToBreedDto(savedBreed);
     }
+
+    public void deleteBreed(Long id) {
+        breedRepository.deleteById(id);
+    }
 }

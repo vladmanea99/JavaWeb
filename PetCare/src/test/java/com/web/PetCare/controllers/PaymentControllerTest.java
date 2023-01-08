@@ -27,8 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -86,6 +85,14 @@ public class PaymentControllerTest {
         assertEquals(paymentDTO.getSession().getPet().getName(), actualPaymentDto.getSession().getPet().getName());
         assertEquals(paymentDTO.getOwner().getId(), actualPaymentDto.getOwner().getId());
         assertEquals(paymentDTO.getOwner().getFirstName(), actualPaymentDto.getOwner().getFirstName());
+    }
+
+    @Test
+    public void deletePaymentTest() throws Exception {
+        doNothing().when(paymentService).deletePayment(any());
+        RequestBuilder deleteEvent = delete("/payments/payment/100");
+        mockMvc.perform(deleteEvent).andExpect(status().isNoContent());
+        verify(paymentService, times(1)).deletePayment(any());
     }
 
     private PaymentDTO defaultPaymentDto() {

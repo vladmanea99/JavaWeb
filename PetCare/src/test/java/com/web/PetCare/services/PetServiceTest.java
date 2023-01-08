@@ -22,7 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(SpringExtension.class)
 public class PetServiceTest {
@@ -81,6 +82,13 @@ public class PetServiceTest {
         assertEquals(exitPetDto.getBreed().getName(), actualPetDto.getBreed().getName());
         assertEquals(exitPetDto.getOwner().getId(), actualPetDto.getOwner().getId());
         assertEquals(exitPetDto.getOwner().getFirstName(), actualPetDto.getOwner().getFirstName());
+    }
+
+    @Test
+    public void deletePet() {
+        doNothing().when(petRepository).deleteById(any());
+        petService.deletePet(1L);
+        verify(petRepository, times(1)).deleteById(any());
     }
 
     private PetDTO defaultEntryPetDto() {

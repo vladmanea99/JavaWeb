@@ -11,15 +11,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-01-07T11:51:59.339798200+02:00[Europe/Bucharest]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-01-08T11:52:17.105346100+02:00[Europe/Bucharest]")
 @Validated
 @Api(value = "payments", description = "the payments API")
 public interface PaymentsApi {
@@ -50,12 +48,34 @@ public interface PaymentsApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"owner\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }, \"session\" : { \"treatment\" : { \"name\" : \"Returning to normal nails\", \"description\" : \"Long treatment of cutting nails little by little\", \"id\" : 1 }, \"sessionDate\" : \"2000-01-23T04:56:07.000+00:00\", \"id\" : 1, \"pet\" : { \"owner\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }, \"name\" : \"Aron\", \"id\" : 1, \"breed\" : { \"name\" : \"rottweiler\", \"description\" : \"Dog breed black and brown, seems vicious but are the best cuddlers\", \"id\" : 1 } } }, \"id\" : 1, \"paymentDate\" : \"2000-01-23T04:56:07.000+00:00\" }";
+                    String exampleString = "{ \"owner\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }, \"amount\" : 1, \"session\" : { \"treatment\" : { \"name\" : \"Returning to normal nails\", \"description\" : \"Long treatment of cutting nails little by little\", \"id\" : 1 }, \"sessionDate\" : \"2000-01-23T04:56:07.000+00:00\", \"id\" : 1, \"pet\" : { \"owner\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }, \"name\" : \"Aron\", \"id\" : 1, \"breed\" : { \"name\" : \"rottweiler\", \"description\" : \"Dog breed black and brown, seems vicious but are the best cuddlers\", \"id\" : 1 } } }, \"id\" : 1, \"paymentDate\" : \"2000-01-23T04:56:07.000+00:00\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
             }
         });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * DELETE /payments/payment/{id} : Delete a payment
+     *
+     * @param id  (required)
+     * @return Successful operation (status code 204)
+     *         or Bad Request (status code 400)
+     *         or Not Found (status code 404)
+     */
+    @ApiOperation(value = "Delete a payment", nickname = "deletePayment", notes = "", tags={ "Payments", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 204, message = "Successful operation"),
+        @ApiResponse(code = 400, message = "Bad Request"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @DeleteMapping(
+        value = "/payments/payment/{id}"
+    )
+    default ResponseEntity<Void> deletePayment(@ApiParam(value = "",required=true) @PathVariable("id") Long id) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
@@ -81,7 +101,7 @@ public interface PaymentsApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"owner\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }, \"session\" : { \"treatment\" : { \"name\" : \"Returning to normal nails\", \"description\" : \"Long treatment of cutting nails little by little\", \"id\" : 1 }, \"sessionDate\" : \"2000-01-23T04:56:07.000+00:00\", \"id\" : 1, \"pet\" : { \"owner\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }, \"name\" : \"Aron\", \"id\" : 1, \"breed\" : { \"name\" : \"rottweiler\", \"description\" : \"Dog breed black and brown, seems vicious but are the best cuddlers\", \"id\" : 1 } } }, \"id\" : 1, \"paymentDate\" : \"2000-01-23T04:56:07.000+00:00\" }";
+                    String exampleString = "{ \"owner\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }, \"amount\" : 1, \"session\" : { \"treatment\" : { \"name\" : \"Returning to normal nails\", \"description\" : \"Long treatment of cutting nails little by little\", \"id\" : 1 }, \"sessionDate\" : \"2000-01-23T04:56:07.000+00:00\", \"id\" : 1, \"pet\" : { \"owner\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }, \"name\" : \"Aron\", \"id\" : 1, \"breed\" : { \"name\" : \"rottweiler\", \"description\" : \"Dog breed black and brown, seems vicious but are the best cuddlers\", \"id\" : 1 } } }, \"id\" : 1, \"paymentDate\" : \"2000-01-23T04:56:07.000+00:00\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

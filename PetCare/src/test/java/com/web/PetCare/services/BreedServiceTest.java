@@ -17,7 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(SpringExtension.class)
 public class BreedServiceTest {
@@ -76,6 +77,13 @@ public class BreedServiceTest {
         assertEquals(exitBreedDto.getId(), actualBreedDto.getId());
         assertEquals(exitBreedDto.getName(), actualBreedDto.getName());
         assertEquals(exitBreedDto.getDescription(), actualBreedDto.getDescription());
+    }
+
+    @Test
+    public void deleteBreed() {
+        doNothing().when(breedRepository).deleteById(any());
+        breedService.deleteBreed(1L);
+        verify(breedRepository, times(1)).deleteById(any());
     }
 
     private BreedDTO defaultEntryBreedDto() {

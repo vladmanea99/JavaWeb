@@ -3,9 +3,11 @@ package com.web.PetCare.controllers;
 import com.web.PetCare.dtos.BreedDTO;
 import com.web.PetCare.models.Breed;
 import com.web.PetCare.services.BreedService;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.NativeWebRequest;
 
@@ -43,4 +45,9 @@ public class BreedsApiController implements BreedsApi {
         return new ResponseEntity<>(savedBreedDto, HttpStatus.CREATED);
     }
 
+    @Override
+    public ResponseEntity<Void> deleteBreed(@PathVariable("id") Long id) {
+        breedService.deleteBreed(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }

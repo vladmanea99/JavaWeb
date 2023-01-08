@@ -31,4 +31,8 @@ public class OwnerService {
         return ownerMapper.ownerToOwnerDto(savedOwner);
     }
 
+    public void deleteOwner(Long id) {
+        ownerRepository.deleteById(id);
+    }
+
 }

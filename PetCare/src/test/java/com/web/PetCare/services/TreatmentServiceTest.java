@@ -18,7 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(SpringExtension.class)
 public class TreatmentServiceTest {
@@ -77,6 +78,13 @@ public class TreatmentServiceTest {
         assertEquals(exitTreatmentDto.getId(), actualTreatmentDto.getId());
         assertEquals(exitTreatmentDto.getName(), actualTreatmentDto.getName());
         assertEquals(exitTreatmentDto.getDescription(), actualTreatmentDto.getDescription());
+    }
+
+    @Test
+    public void deleteTreatment() {
+        doNothing().when(treatmentRepository).deleteById(any());
+        treatmentService.deleteTreatment(1L);
+        verify(treatmentRepository, times(1)).deleteById(any());
     }
 
     private static final List<TreatmentDTO> TREATMENT_DTO_LIST = ImmutableList.of(

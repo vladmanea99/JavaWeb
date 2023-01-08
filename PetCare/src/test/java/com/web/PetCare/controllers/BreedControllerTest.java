@@ -23,8 +23,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -73,6 +72,14 @@ public class BreedControllerTest {
         final BreedDTO actualBreedDto = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), BreedDTO.class);
         assertNotNull(actualBreedDto);
         assertEquals(breedDTO.getName(), actualBreedDto.getName());
+    }
+
+    @Test
+    public void deleteBreedTest() throws Exception {
+        doNothing().when(breedService).deleteBreed(any());
+        RequestBuilder deleteEvent = delete("/breeds/breed/100");
+        mockMvc.perform(deleteEvent).andExpect(status().isNoContent());
+        verify(breedService, times(1)).deleteBreed(any());
     }
 
     private static final List<BreedDTO> BREED_DTO_LIST = ImmutableList.of(

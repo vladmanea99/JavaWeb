@@ -2,9 +2,11 @@ package com.web.PetCare.controllers;
 
 import com.web.PetCare.dtos.PetDTO;
 import com.web.PetCare.services.PetService;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.NativeWebRequest;
 
@@ -43,4 +45,9 @@ public class PetsApiController implements PetsApi {
         return new ResponseEntity<>(savedPetDto, HttpStatus.CREATED);
     }
 
+    @Override
+    public ResponseEntity<Void> deletePet(@PathVariable("id") Long id) {
+        petService.deletePet(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }

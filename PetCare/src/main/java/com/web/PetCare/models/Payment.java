@@ -29,7 +29,7 @@ public class Payment {
     @Column(name = "AMOUNT")
     private Integer amount;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Session session;
 

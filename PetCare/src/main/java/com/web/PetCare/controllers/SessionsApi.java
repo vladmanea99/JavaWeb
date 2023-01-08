@@ -11,15 +11,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-12-28T15:44:42.567696200+02:00[Europe/Bucharest]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-01-08T11:52:17.105346100+02:00[Europe/Bucharest]")
 @Validated
 @Api(value = "sessions", description = "the sessions API")
 public interface SessionsApi {
@@ -56,6 +54,28 @@ public interface SessionsApi {
                 }
             }
         });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * DELETE /sessions/session/{id} : Delete a session
+     *
+     * @param id  (required)
+     * @return Successful operation (status code 204)
+     *         or Bad Request (status code 400)
+     *         or Not Found (status code 404)
+     */
+    @ApiOperation(value = "Delete a session", nickname = "deleteSession", notes = "", tags={ "Sessions", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 204, message = "Successful operation"),
+        @ApiResponse(code = 400, message = "Bad Request"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @DeleteMapping(
+        value = "/sessions/session/{id}"
+    )
+    default ResponseEntity<Void> deleteSession(@ApiParam(value = "",required=true) @PathVariable("id") Long id) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

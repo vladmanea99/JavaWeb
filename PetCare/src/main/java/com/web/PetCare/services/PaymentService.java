@@ -35,4 +35,7 @@ public class PaymentService {
         return paymentMapper.paymentToPaymentDto(savedPayment);
     }
 
+    public void deletePayment(Long id) {
+        paymentRepository.deleteById(id);
+    }
 }

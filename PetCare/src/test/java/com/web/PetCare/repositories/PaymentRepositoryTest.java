@@ -34,7 +34,7 @@ public class PaymentRepositoryTest {
                 LocalDateTime.now(),
                 100,
                 new Session(
-                        null,
+                        1L,
                         LocalDateTime.now(),
                         new Pet(1L, "Nitro", new Breed(34L, "rottweiler", "Very friendly breed"), new Owner(5L, "Vlad", "Manea")),
                         new Treatment(29L, "maggots removal", null)
