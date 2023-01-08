@@ -2,9 +2,11 @@ package com.web.PetCare.controllers;
 
 import com.web.PetCare.dtos.SessionDTO;
 import com.web.PetCare.services.SessionService;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.NativeWebRequest;
 
@@ -41,6 +43,12 @@ public class SessionsApiController implements SessionsApi {
     public ResponseEntity<SessionDTO> createSession(@Valid SessionDTO sessionDTO) {
         SessionDTO savedSessionDto = sessionService.createSession(sessionDTO);
         return new ResponseEntity<>(savedSessionDto, HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteSession(@PathVariable("id") Long id) {
+        sessionService.deleteSession(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

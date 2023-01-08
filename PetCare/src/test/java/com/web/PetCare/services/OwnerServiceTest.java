@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 public class OwnerServiceTest {
@@ -70,6 +70,13 @@ public class OwnerServiceTest {
         assertEquals(exitOwnerDto.getId(), ownerDTO.getId());
         assertEquals(exitOwnerDto.getFirstName(), ownerDTO.getFirstName());
         assertEquals(exitOwnerDto.getLastName(), ownerDTO.getLastName());
+    }
+
+    @Test
+    public void deleteOwner() {
+        doNothing().when(ownerRepository).deleteById(any());
+        ownerService.deleteOwner(1L);
+        verify(ownerRepository, times(1)).deleteById(any());
     }
 
     private OwnerDTO defaultEntryOwnerDto() {

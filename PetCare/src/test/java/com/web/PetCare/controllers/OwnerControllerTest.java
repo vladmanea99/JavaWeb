@@ -23,8 +23,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -87,6 +86,14 @@ public class OwnerControllerTest {
                 .content(ownerDtoStr)
                 .contentType(MediaType.APPLICATION_JSON);
         mockMvc.perform(postEvent).andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void deleteOwnerTest() throws Exception {
+        doNothing().when(ownerService).deleteOwner(any());
+        RequestBuilder deleteEvent = delete("/owners/owner/100");
+        mockMvc.perform(deleteEvent).andExpect(status().isNoContent());
+        verify(ownerService, times(1)).deleteOwner(any());
     }
 
     private static final List<OwnerDTO> OWNER_DTO_LIST = ImmutableList.of(

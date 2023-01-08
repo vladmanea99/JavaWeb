@@ -24,8 +24,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -78,6 +77,14 @@ public class PetControllerTest {
         assertEquals(petDTO.getBreed().getName(), actualPetDto.getBreed().getName());
         assertEquals(petDTO.getOwner().getId(), actualPetDto.getOwner().getId());
         assertEquals(petDTO.getOwner().getFirstName(), actualPetDto.getOwner().getFirstName());
+    }
+
+    @Test
+    public void deletePetTest() throws Exception {
+        doNothing().when(petService).deletePet(any());
+        RequestBuilder deleteEvent = delete("/pets/pet/100");
+        mockMvc.perform(deleteEvent).andExpect(status().isNoContent());
+        verify(petService, times(1)).deletePet(any());
     }
 
     private PetDTO defaultPetDto() {

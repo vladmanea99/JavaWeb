@@ -34,4 +34,8 @@ public class TreatmentService {
         Treatment savedTreatment = treatmentRepository.saveAndFlush(treatmentMapper.treatmentDtoToTreatment(treatmentDTO));
         return treatmentMapper.treatmentToTreatmentDto(savedTreatment);
     }
+
+    public void deleteTreatment(Long id) {
+        treatmentRepository.deleteById(id);
+    }
 }

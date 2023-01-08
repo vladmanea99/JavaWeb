@@ -22,8 +22,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -73,6 +72,14 @@ public class TreatmentControllerTest {
         final TreatmentDTO actualTreatmentDto = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), TreatmentDTO.class);
         assertNotNull(actualTreatmentDto);
         assertEquals(treatmentDTO.getName(), actualTreatmentDto.getName());
+    }
+
+    @Test
+    public void deleteTreatmentTest() throws Exception {
+        doNothing().when(treatmentService).deleteTreatment(any());
+        RequestBuilder deleteEvent = delete("/treatments/treatment/100");
+        mockMvc.perform(deleteEvent).andExpect(status().isNoContent());
+        verify(treatmentService, times(1)).deleteTreatment(any());
     }
 
     private static final List<TreatmentDTO> TREATMENT_DTO_LIST = ImmutableList.of(

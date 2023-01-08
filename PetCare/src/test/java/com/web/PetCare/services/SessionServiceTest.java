@@ -19,7 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(SpringExtension.class)
 public class SessionServiceTest {
@@ -86,6 +87,13 @@ public class SessionServiceTest {
         assertEquals(exitSessionDto.getTreatment().getId(), actualSessionDto.getTreatment().getId());
         assertEquals(exitSessionDto.getTreatment().getName(), actualSessionDto.getTreatment().getName());
         assertEquals(exitSessionDto.getTreatment().getDescription(), actualSessionDto.getTreatment().getDescription());
+    }
+
+    @Test
+    public void deleteSession() {
+        doNothing().when(sessionRepository).deleteById(any());
+        sessionService.deleteSession(1L);
+        verify(sessionRepository, times(1)).deleteById(any());
     }
 
     private static final List<SessionDTO> SESSION_DTO_LIST = ImmutableList.of(

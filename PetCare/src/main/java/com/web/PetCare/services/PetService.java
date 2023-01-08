@@ -34,4 +34,8 @@ public class PetService {
         Pet pet = petMapper.petDtoToPet(petDTO);
         return petMapper.petToPetDto(petRepository.saveAndFlush(pet));
     }
+
+    public void deletePet(Long id) {
+        petRepository.deleteById(id);
+    }
 }

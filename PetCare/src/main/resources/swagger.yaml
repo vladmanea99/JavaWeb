@@ -44,6 +44,26 @@ paths:
           description: Bad Request
         404:
           description: Not Found
+  /pets/pet/{id}:
+    delete:
+      summary: Delete a pet
+      operationId: deletePet
+      tags:
+        - Pets
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        204:
+          description: Successful operation
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
   /owners/owner:
     get:
       summary: List all owners
@@ -80,6 +100,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Owner"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /owners/owner/{id}:
+    delete:
+      summary: Delete an owner
+      operationId: deleteOwner
+      tags:
+        - Owners
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        204:
+          description: Successful operation
         400:
           description: Bad Request
         404:
@@ -124,6 +164,26 @@ paths:
           description: Bad Request
         404:
           description: Not Found
+  /treatments/treatment/{id}:
+    delete:
+      summary: Delete a treatment
+      operationId: deleteTreatment
+      tags:
+        - Treatments
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        204:
+          description: Successful operation
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
   /breeds/breed:
     get:
       summary: List all breeds
@@ -160,6 +220,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Breed"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /breeds/breed/{id}:
+    delete:
+      summary: Delete a breed
+      operationId: deleteBreed
+      tags:
+        - Breeds
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        204:
+          description: Successful operation
         400:
           description: Bad Request
         404:
@@ -204,6 +284,26 @@ paths:
           description: Bad Request
         404:
           description: Not Found
+  /sessions/session/{id}:
+    delete:
+      summary: Delete a session
+      operationId: deleteSession
+      tags:
+        - Sessions
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        204:
+          description: Successful operation
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
   /payments/payment:
     get:
       summary: List all payments
@@ -240,6 +340,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Payment"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /payments/payment/{id}:
+    delete:
+      summary: Delete a payment
+      operationId: deletePayment
+      tags:
+        - Payments
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        204:
+          description: Successful operation
         400:
           description: Bad Request
         404:

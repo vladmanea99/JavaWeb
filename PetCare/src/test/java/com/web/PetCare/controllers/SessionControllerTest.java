@@ -25,8 +25,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -80,6 +79,14 @@ public class SessionControllerTest {
         assertEquals(sessionDTO.getTreatment().getDescription(), actualSessionDto.getTreatment().getDescription());
         assertEquals(sessionDTO.getPet().getId(), actualSessionDto.getPet().getId());
         assertEquals(sessionDTO.getPet().getName(), actualSessionDto.getPet().getName());
+    }
+
+    @Test
+    public void deleteSessionTest() throws Exception {
+        doNothing().when(sessionService).deleteSession(any());
+        RequestBuilder deleteEvent = delete("/sessions/session/100");
+        mockMvc.perform(deleteEvent).andExpect(status().isNoContent());
+        verify(sessionService, times(1)).deleteSession(any());
     }
 
     private SessionDTO defaultSessionDto() {

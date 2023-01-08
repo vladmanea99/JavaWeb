@@ -36,4 +36,8 @@ public class SessionService {
         Session savedSession = sessionRepository.saveAndFlush(sessionMapper.sessionDtoToSession(sessionDTO));
         return sessionMapper.sessionToSessionDto(savedSession);
     }
+
+    public void deleteSession(Long id) {
+        sessionRepository.deleteById(id);
+    }
 }

@@ -19,7 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(SpringExtension.class)
 public class PaymentServiceTest {
@@ -96,6 +97,13 @@ public class PaymentServiceTest {
         assertEquals(exitPaymentDto.getSession().getTreatment().getDescription(), actualPaymentDto.getSession().getTreatment().getDescription());
         assertEquals(exitPaymentDto.getOwner().getId(), actualPaymentDto.getOwner().getId());
         assertEquals(exitPaymentDto.getOwner().getFirstName(), actualPaymentDto.getOwner().getFirstName());
+    }
+
+    @Test
+    public void deletePayment() {
+        doNothing().when(paymentRepository).deleteById(any());
+        paymentService.deletePayment(1L);
+        verify(paymentRepository, times(1)).deleteById(any());
     }
 
     private static final List<PaymentDTO> PAYMENT_DTO_LIST = ImmutableList.of(
