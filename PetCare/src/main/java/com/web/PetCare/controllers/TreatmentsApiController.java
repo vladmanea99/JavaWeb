@@ -45,11 +45,13 @@ public class TreatmentsApiController implements TreatmentsApi {
         return new ResponseEntity<>(savedTreatmentDto, HttpStatus.CREATED);
     }
 
+    @Override
     public ResponseEntity<Void> deleteTreatment(@PathVariable("id") Long id) {
         treatmentService.deleteTreatment(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @Override
     public ResponseEntity<List<TreatmentDTO>> getTreatmentsPerPet(@PathVariable("petId") Long petId) {
         List<TreatmentDTO> treatmentDTOS = treatmentService.getTreatmentsPerPet(petId);
         return new ResponseEntity<>(treatmentDTOS, HttpStatus.OK);

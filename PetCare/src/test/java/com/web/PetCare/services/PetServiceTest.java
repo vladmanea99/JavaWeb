@@ -91,6 +91,25 @@ public class PetServiceTest {
         verify(petRepository, times(1)).deleteById(any());
     }
 
+    @Test
+    public void getPetsWithTreatmentsTest() {
+        final List<PetDTO> petDTOList = PET_DTO_LIST;
+        final List<Pet> petList = PET_LIST;
+
+        when(petRepository.getPetsWithTreatments()).thenReturn(petList);
+        when(petMapper.petToPetDto(eq(petList.get(0)))).thenReturn(petDTOList.get(0));
+
+        List<PetDTO> actualPetDtoList = petService.getPetsWithTreatments();
+
+        assertNotNull(actualPetDtoList);
+        assertEquals(1, actualPetDtoList.size());
+        assertEquals(petDTOList.get(0).getId(), actualPetDtoList.get(0).getId());
+        assertEquals(petDTOList.get(0).getName(), actualPetDtoList.get(0).getName());
+        assertEquals(petDTOList.get(0).getBreed().getId(), actualPetDtoList.get(0).getBreed().getId());
+        assertEquals(petDTOList.get(0).getBreed().getName(), actualPetDtoList.get(0).getBreed().getName());
+        assertEquals(petDTOList.get(0).getOwner().getId(), actualPetDtoList.get(0).getOwner().getId());
+        assertEquals(petDTOList.get(0).getOwner().getFirstName(), actualPetDtoList.get(0).getOwner().getFirstName());
+    }
     private PetDTO defaultEntryPetDto() {
         return new PetDTO()
                 .name("Aron")

@@ -50,4 +50,10 @@ public class PetsApiController implements PetsApi {
         petService.deletePet(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @Override
+    public ResponseEntity<List<PetDTO>> getPetsWithTreatments() {
+        List<PetDTO> petDTOS = petService.getPetsWithTreatments();
+        return new ResponseEntity<>(petDTOS, HttpStatus.OK);
+    }
 }
