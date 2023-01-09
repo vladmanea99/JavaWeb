@@ -1,6 +1,7 @@
 package com.web.PetCare.controllers;
 
 import com.web.PetCare.dtos.TreatmentDTO;
+import com.web.PetCare.repositories.TreatmentRepository;
 import com.web.PetCare.services.TreatmentService;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
@@ -47,6 +48,11 @@ public class TreatmentsApiController implements TreatmentsApi {
     public ResponseEntity<Void> deleteTreatment(@PathVariable("id") Long id) {
         treatmentService.deleteTreatment(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    public ResponseEntity<List<TreatmentDTO>> getTreatmentsPerPet(@PathVariable("petId") Long petId) {
+        List<TreatmentDTO> treatmentDTOS = treatmentService.getTreatmentsPerPet(petId);
+        return new ResponseEntity<>(treatmentDTOS, HttpStatus.OK);
     }
 
 }

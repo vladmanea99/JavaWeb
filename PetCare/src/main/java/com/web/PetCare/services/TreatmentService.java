@@ -38,4 +38,12 @@ public class TreatmentService {
     public void deleteTreatment(Long id) {
         treatmentRepository.deleteById(id);
     }
+
+    public List<TreatmentDTO> getTreatmentsPerPet(Long petId) {
+        return treatmentRepository.getTreatmentsPerPet(petId)
+                .stream()
+                .map(treatmentMapper::treatmentToTreatmentDto)
+                .collect(Collectors.toList());
+    }
+
 }

@@ -87,6 +87,29 @@ public class TreatmentServiceTest {
         verify(treatmentRepository, times(1)).deleteById(any());
     }
 
+    @Test
+    public void getTreatmentsPerPet() {
+        final List<TreatmentDTO> treatmentDTOList = TREATMENT_DTO_LIST;
+        final List<Treatment> treatmentList = TREATMENT_LIST;
+
+        when(treatmentRepository.getTreatmentsPerPet(any())).thenReturn(treatmentList);
+        when(treatmentMapper.treatmentToTreatmentDto(eq(treatmentList.get(0)))).thenReturn(treatmentDTOList.get(0));
+        when(treatmentMapper.treatmentToTreatmentDto(eq(treatmentList.get(1)))).thenReturn(treatmentDTOList.get(1));
+
+        List<TreatmentDTO> actualTreatmentDtoList = treatmentService.getTreatmentsPerPet(1L);
+
+        assertNotNull(actualTreatmentDtoList);
+        assertEquals(2, actualTreatmentDtoList.size());
+
+        assertEquals(treatmentDTOList.get(0).getId(), actualTreatmentDtoList.get(0).getId());
+        assertEquals(treatmentDTOList.get(0).getName(), actualTreatmentDtoList.get(0).getName());
+        assertEquals(treatmentDTOList.get(0).getDescription(), actualTreatmentDtoList.get(0).getDescription());
+
+        assertEquals(treatmentDTOList.get(1).getId(), actualTreatmentDtoList.get(1).getId());
+        assertEquals(treatmentDTOList.get(1).getName(), actualTreatmentDtoList.get(1).getName());
+        assertEquals(treatmentDTOList.get(1).getDescription(), actualTreatmentDtoList.get(1).getDescription());
+    }
+
     private static final List<TreatmentDTO> TREATMENT_DTO_LIST = ImmutableList.of(
             new TreatmentDTO().id(1L).name("massage").description("bath + massage of the fur and body"),
             new TreatmentDTO().id(2L).name("maggots removal").description(null)
