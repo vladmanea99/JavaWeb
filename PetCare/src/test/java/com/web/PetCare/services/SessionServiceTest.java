@@ -96,6 +96,34 @@ public class SessionServiceTest {
         verify(sessionRepository, times(1)).deleteById(any());
     }
 
+    @Test
+    public void getAllSessionsThatGotPayedTest() {
+        final List<SessionDTO> sessionDTOList = SESSION_DTO_LIST;
+        final List<Session> sessionList = SESSION_LIST;
+
+        when(sessionRepository.getSessionsThatGotPaid()).thenReturn(sessionList);
+        when(sessionMapper.sessionToSessionDto(eq(sessionList.get(0)))).thenReturn(sessionDTOList.get(0));
+
+        List<SessionDTO> actualSessionDtoList = sessionService.getSessionsThatGotPaid();
+
+        assertNotNull(actualSessionDtoList);
+
+        assertEquals(sessionDTOList.get(0).getId(), actualSessionDtoList.get(0).getId());
+        assertEquals(sessionDTOList.get(0).getSessionDate().toLocalDateTime(), actualSessionDtoList.get(0).getSessionDate().toLocalDateTime());
+        assertEquals(sessionDTOList.get(0).getTreatment().getId(), actualSessionDtoList.get(0).getTreatment().getId());
+        assertEquals(sessionDTOList.get(0).getTreatment().getName(), actualSessionDtoList.get(0).getTreatment().getName());
+        assertEquals(sessionDTOList.get(0).getTreatment().getDescription(), actualSessionDtoList.get(0).getTreatment().getDescription());
+        assertEquals(sessionDTOList.get(0).getPet().getId(), actualSessionDtoList.get(0).getPet().getId());
+        assertEquals(sessionDTOList.get(0).getPet().getName(), actualSessionDtoList.get(0).getPet().getName());
+        assertEquals(sessionDTOList.get(0).getPet().getBreed().getId(), actualSessionDtoList.get(0).getPet().getBreed().getId());
+        assertEquals(sessionDTOList.get(0).getPet().getBreed().getName(), actualSessionDtoList.get(0).getPet().getBreed().getName());
+        assertEquals(sessionDTOList.get(0).getPet().getBreed().getDescription(), actualSessionDtoList.get(0).getPet().getBreed().getDescription());
+        assertEquals(sessionDTOList.get(0).getPet().getOwner().getId(), actualSessionDtoList.get(0).getPet().getOwner().getId());
+        assertEquals(sessionDTOList.get(0).getPet().getOwner().getFirstName(), actualSessionDtoList.get(0).getPet().getOwner().getFirstName());
+        assertEquals(sessionDTOList.get(0).getPet().getOwner().getLastName(), actualSessionDtoList.get(0).getPet().getOwner().getLastName());
+
+    }
+
     private static final List<SessionDTO> SESSION_DTO_LIST = ImmutableList.of(
             new SessionDTO()
                     .id(1L)

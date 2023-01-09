@@ -368,6 +368,25 @@ paths:
           description: Bad Request
         404:
           description: Not Found
+  /sessions/sessionsPaid:
+    get:
+      summary: List all sessions that got paid
+      operationId: getSessionsThatGotPaid
+      tags:
+        - Sessions
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Session"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
   /payments/payment:
     get:
       summary: List all payments

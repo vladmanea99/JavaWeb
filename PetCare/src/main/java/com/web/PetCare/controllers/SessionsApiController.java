@@ -51,4 +51,10 @@ public class SessionsApiController implements SessionsApi {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @Override
+    public ResponseEntity<List<SessionDTO>> getSessionsThatGotPaid() {
+        List<SessionDTO> sessionDTOS = sessionService.getSessionsThatGotPaid();
+        return new ResponseEntity<>(sessionDTOS, HttpStatus.OK);
+    }
+
 }
