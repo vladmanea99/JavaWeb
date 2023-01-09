@@ -51,4 +51,10 @@ public class PaymentsApiController implements PaymentsApi {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @Override
+    public ResponseEntity<String> getTotalPaymentPet(@PathVariable("petId") Long petId) {
+        String paidAmount = paymentService.getPayedAmountPerPet(petId);
+        return new ResponseEntity<>(paidAmount, HttpStatus.OK);
+    }
+
 }
