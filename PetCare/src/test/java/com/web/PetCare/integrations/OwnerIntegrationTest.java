@@ -25,8 +25,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -36,6 +38,9 @@ public class OwnerIntegrationTest {
 
     private static final String REQUEST_PATH_GET_OWNERS = "%s/owners/owner";
     private static final String REQUEST_PATH_CREATE_OWNER = "%s/owners/owner";
+
+    private static final String REQUEST_PATH_OWNERS_THAT_PAID = "%s/owners/ownersThatPaid";
+    private static final String REQUEST_PATH_DELETE_OWNER = "%s/owners/owner/%s";
 
     @LocalServerPort
     private String port;
@@ -60,14 +65,31 @@ public class OwnerIntegrationTest {
 
     @Test
     public void shouldGetAllOwners() throws Exception {
+        OwnerDTO ownerDTO = defaultOwnerDto();
+        String ownerDtoStr = objectMapper.writeValueAsString(ownerDTO);
+        RequestBuilder createOwner = post(String.format(REQUEST_PATH_CREATE_OWNER, baseUri))
+                .accept(MediaType.APPLICATION_JSON)
+                .content(ownerDtoStr)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult mvcResult = mockMvc.perform(createOwner).andExpect(status().isCreated()).andReturn();
+        assertNotNull(mvcResult);
+        final OwnerDTO actualOwnerDto = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), OwnerDTO.class);
+        assertNotNull(actualOwnerDto);
+        assertEquals(ownerDTO.getFirstName(), actualOwnerDto.getFirstName());
+        assertEquals(ownerDTO.getLastName(), actualOwnerDto.getLastName());
+
         RequestBuilder getAllOwners = get(String.format(REQUEST_PATH_GET_OWNERS, baseUri));
-        final MvcResult mvcResult = mockMvc.perform(getAllOwners).andExpect(status().isOk()).andReturn();
-        final List<OwnerDTO> actualOwnerDtoList = Arrays.asList(objectMapper.readValue(mvcResult.getResponse().getContentAsString(), OwnerDTO[].class));
+        final MvcResult mvcResult2 = mockMvc.perform(getAllOwners).andExpect(status().isOk()).andReturn();
+        final List<OwnerDTO> actualOwnerDtoList = Arrays.asList(objectMapper.readValue(mvcResult2.getResponse().getContentAsString(), OwnerDTO[].class));
 
         assertFalse(actualOwnerDtoList.isEmpty());
+
+        RequestBuilder deleteEvent = delete(String.format(REQUEST_PATH_DELETE_OWNER, baseUri, actualOwnerDto.getId()));
+        mockMvc.perform(deleteEvent).andExpect(status().isNoContent());
+
     }
 
-    @Disabled
     @Test
     public void shouldCreateOwner() throws Exception {
         OwnerDTO ownerDTO = defaultOwnerDto();
@@ -83,9 +105,39 @@ public class OwnerIntegrationTest {
         assertNotNull(actualOwnerDto);
         assertEquals(ownerDTO.getFirstName(), actualOwnerDto.getFirstName());
         assertEquals(ownerDTO.getLastName(), actualOwnerDto.getLastName());
+        RequestBuilder deleteEvent = delete(String.format(REQUEST_PATH_DELETE_OWNER, baseUri, actualOwnerDto.getId()));
+        mockMvc.perform(deleteEvent).andExpect(status().isNoContent());
+
+    }
+
+    @Test
+    public void shouldDeleteOwner() throws Exception {
+        OwnerDTO ownerDTO = defaultOwnerDto();
+        String ownerDtoStr = objectMapper.writeValueAsString(ownerDTO);
+        RequestBuilder createOwner = post(String.format(REQUEST_PATH_CREATE_OWNER, baseUri))
+                .accept(MediaType.APPLICATION_JSON)
+                .content(ownerDtoStr)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult mvcResult = mockMvc.perform(createOwner).andExpect(status().isCreated()).andReturn();
+        assertNotNull(mvcResult);
+        final OwnerDTO actualOwnerDto = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), OwnerDTO.class);
+        assertNotNull(actualOwnerDto);
+        assertEquals(ownerDTO.getFirstName(), actualOwnerDto.getFirstName());
+        assertEquals(ownerDTO.getLastName(), actualOwnerDto.getLastName());
+        RequestBuilder deleteEvent = delete(String.format(REQUEST_PATH_DELETE_OWNER, baseUri, actualOwnerDto.getId()));
+        mockMvc.perform(deleteEvent).andExpect(status().isNoContent());
+    }
+
+    @Test
+    public void shouldGetOwnersThatPaid() throws Exception {
+        RequestBuilder getAllOwnersThatPaid = get(String.format(REQUEST_PATH_OWNERS_THAT_PAID, baseUri));
+        final MvcResult mvcResult2 = mockMvc.perform(getAllOwnersThatPaid).andExpect(status().isOk()).andReturn();
+        final List<OwnerDTO> actualOwnerDtoList = Arrays.asList(objectMapper.readValue(mvcResult2.getResponse().getContentAsString(), OwnerDTO[].class));
+
     }
 
     private OwnerDTO defaultOwnerDto() {
-        return new OwnerDTO().firstName("John").lastName("Doe");
+        return new OwnerDTO().firstName("John").lastName("Snow");
     }
 }

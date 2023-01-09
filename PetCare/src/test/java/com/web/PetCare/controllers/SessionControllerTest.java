@@ -89,20 +89,6 @@ public class SessionControllerTest {
         verify(sessionService, times(1)).deleteSession(any());
     }
 
-    private SessionDTO defaultSessionDto() {
-        return new SessionDTO()
-                .sessionDate(OffsetDateTime.now())
-                .pet(new PetDTO()
-                        .id(1L)
-                        .name("Aron")
-                        .breed(new BreedDTO().id(1L).name("rottweiler").description("best breed"))
-                        .owner(new OwnerDTO().id(2L).firstName("Vlad").lastName("Manea")))
-                .treatment(new TreatmentDTO()
-                        .id(1L)
-                        .name("massage")
-                        .description(null));
-    }
-
     @Test
     public void getListOfSessionsThatGotPaidTest() throws Exception {
         when(sessionService.getSessionsThatGotPaid()).thenReturn(SESSION_DTO_LIST);
@@ -115,6 +101,20 @@ public class SessionControllerTest {
         assertNotNull(actualSessionDtoList);
         assertEquals(2, actualSessionDtoList.size());
         verify(sessionService, times(1)).getSessionsThatGotPaid();
+    }
+
+    private SessionDTO defaultSessionDto() {
+        return new SessionDTO()
+                .sessionDate(OffsetDateTime.now())
+                .pet(new PetDTO()
+                        .id(1L)
+                        .name("Aron")
+                        .breed(new BreedDTO().id(1L).name("rottweiler").description("best breed"))
+                        .owner(new OwnerDTO().id(2L).firstName("Vlad").lastName("Manea")))
+                .treatment(new TreatmentDTO()
+                        .id(1L)
+                        .name("massage")
+                        .description(null));
     }
 
     private static final List<SessionDTO> SESSION_DTO_LIST = ImmutableList.of(
