@@ -95,6 +95,17 @@ public class PaymentControllerTest {
         verify(paymentService, times(1)).deletePayment(any());
     }
 
+    @Test
+    public void getTotalPaymentPerPetTest() throws Exception {
+        when(paymentService.getPayedAmountPerPet(any())).thenReturn("1000");
+        RequestBuilder getPaidAmount = get("/payments/petPayment/1");
+        MvcResult mvcResult = mockMvc.perform(getPaidAmount).andExpect(status().isOk()).andReturn();
+        final String amount = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), String.class);
+        verify(paymentService, times(1)).getPayedAmountPerPet(any());
+        assertEquals("1000", amount);
+
+    }
+
     private PaymentDTO defaultPaymentDto() {
         return new PaymentDTO()
                 .id(1L)

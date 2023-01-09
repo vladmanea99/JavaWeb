@@ -15,8 +15,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
@@ -104,6 +103,13 @@ public class PaymentServiceTest {
         doNothing().when(paymentRepository).deleteById(any());
         paymentService.deletePayment(1L);
         verify(paymentRepository, times(1)).deleteById(any());
+    }
+
+    @Test
+    public void getPaidAmountPerPetTest() {
+        when(paymentRepository.getTotalAmountByPetId(any())).thenReturn(1000);
+        String actualAmount = paymentService.getPayedAmountPerPet(1L);
+        assertEquals("1000", actualAmount);
     }
 
     private static final List<PaymentDTO> PAYMENT_DTO_LIST = ImmutableList.of(
