@@ -1,0 +1,582 @@
+openapi: "3.0.0"
+info:
+  title: PetCare Service
+  description: Implementation of PetCare
+  version: 0.1.0
+paths:
+  /pets/pet:
+    get:
+      summary: List all pets
+      operationId: getPets
+      tags:
+        - Pets
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+    post:
+      summary: Create a pet
+      operationId: createPet
+      requestBody:
+        description: Create a pet
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pet"
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pet"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /pets/pet/{id}:
+    delete:
+      summary: Delete a pet
+      operationId: deletePet
+      tags:
+        - Pets
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        204:
+          description: Successful operation
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /pets/petWithTreatments:
+    get:
+      summary: List all pets that went or go through treatments
+      operationId: getPetsWithTreatments
+      tags:
+        - Pets
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /owners/owner:
+    get:
+      summary: List all owners
+      operationId: getOwners
+      tags:
+        - Owners
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Owner"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+    post:
+      summary: Create an owner
+      operationId: createOwner
+      requestBody:
+        description: Create an owner
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Owner"
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Owner"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /owners/owner/{id}:
+    delete:
+      summary: Delete an owner
+      operationId: deleteOwner
+      tags:
+        - Owners
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        204:
+          description: Successful operation
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /owners/ownersThatPaid:
+    get:
+      summary: List all owners that have paid
+      operationId: getOwnersThatPaid
+      tags:
+        - Owners
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Owner"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /treatments/treatment:
+    get:
+      summary: List all treatments
+      operationId: getTreatments
+      tags:
+        - Treatments
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Treatment"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+    post:
+      summary: Create an treatment
+      operationId: createTreatment
+      requestBody:
+        description: Create an treatment
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Treatment"
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Treatment"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /treatments/treatment/{id}:
+    delete:
+      summary: Delete a treatment
+      operationId: deleteTreatment
+      tags:
+        - Treatments
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        204:
+          description: Successful operation
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /treatments/allTreatmentsPet/{petId}:
+    get:
+      summary: List all treatments used on a pet
+      operationId: getTreatmentsPerPet
+      tags:
+        - Treatments
+      parameters:
+        - in: path
+          name: petId
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Treatment"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /breeds/breed:
+    get:
+      summary: List all breeds
+      operationId: getBreeds
+      tags:
+        - Breeds
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Breed"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+    post:
+      summary: Create a breed
+      operationId: createBreed
+      requestBody:
+        description: Create a breed
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Breed"
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Breed"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /breeds/breed/{id}:
+    delete:
+      summary: Delete a breed
+      operationId: deleteBreed
+      tags:
+        - Breeds
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        204:
+          description: Successful operation
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /sessions/session:
+    get:
+      summary: List all sessions
+      operationId: getSessions
+      tags:
+        - Sessions
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Session"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+    post:
+      summary: Create a sessions
+      operationId: createSession
+      requestBody:
+        description: Create a session
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Session"
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Session"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /sessions/session/{id}:
+    delete:
+      summary: Delete a session
+      operationId: deleteSession
+      tags:
+        - Sessions
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        204:
+          description: Successful operation
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /sessions/sessionsPaid:
+    get:
+      summary: List all sessions that got paid
+      operationId: getSessionsThatGotPaid
+      tags:
+        - Sessions
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Session"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /payments/payment:
+    get:
+      summary: List all payments
+      operationId: getPayments
+      tags:
+        - Payments
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Payment"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+    post:
+      summary: Create a payment
+      operationId: createPayment
+      requestBody:
+        description: Create a payment
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Payment"
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Payment"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /payments/payment/{id}:
+    delete:
+      summary: Delete a payment
+      operationId: deletePayment
+      tags:
+        - Payments
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        204:
+          description: Successful operation
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+  /payments/petPayment/{petId}:
+    get:
+      summary: Get the amount of money spent on session for a specific pet
+      operationId: getTotalPaymentPet
+      tags:
+        - Payments
+      parameters:
+        - in: path
+          name: petId
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "1000"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+components:
+  schemas:
+    Pet:
+      type: object
+      required:
+        - name
+        - breed
+        - owner
+      properties:
+        id:
+          type: integer
+          example: 1
+          format: int64
+        name:
+          type: string
+          example: "Aron"
+        breed:
+          $ref: "#/components/schemas/Breed"
+        owner:
+          $ref: "#/components/schemas/Owner"
+    Owner:
+      type: object
+      required:
+        - lastName
+        - firstName
+      properties:
+        id:
+          type: integer
+          example: 1
+          format: int64
+        firstName:
+          type: string
+          example: "John"
+        lastName:
+          type: string
+          example: "Doe"
+    Breed:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          example: 1
+          format: int64
+        name:
+          type: string
+          example: "rottweiler"
+        description:
+          example: "Dog breed black and brown, seems vicious but are the best cuddlers"
+          type: string
+    Treatment:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          example: 1
+          format: int64
+        name:
+          type: string
+          example: "Returning to normal nails"
+        description:
+          example: "Long treatment of cutting nails little by little"
+          type: string
+    Session:
+      type: object
+      required:
+        - pet
+        - treatment
+        - sessionDate
+      properties:
+        id:
+          type: integer
+          example: 1
+          format: int64
+        sessionDate:
+          type: string
+          example: "2022-11-16T20:15:23"
+          format: date-time
+        pet:
+          $ref: "#/components/schemas/Pet"
+        treatment:
+          $ref: "#/components/schemas/Treatment"
+    Payment:
+      type: object
+      required:
+        - session
+        - owner
+        - paymentDate
+        - amount
+      properties:
+        id:
+          type: integer
+          example: 1
+          format: int64
+        amount:
+          type: integer
+          example: 1
+        session:
+          $ref: "#/components/schemas/Session"
+        owner:
+          $ref: "#/components/schemas/Owner"
+        paymentDate:
+          type: string
+          example: "2022-11-16T22:20:13"
+          format: date-time
