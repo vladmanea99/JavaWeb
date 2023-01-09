@@ -38,4 +38,11 @@ public class PetService {
     public void deletePet(Long id) {
         petRepository.deleteById(id);
     }
+
+    public List<PetDTO> getPetsWithTreatments() {
+        return petRepository.getPetsWithTreatments()
+                .stream()
+                .map(petMapper::petToPetDto)
+                .collect(Collectors.toList());
+    }
 }

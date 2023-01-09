@@ -64,6 +64,25 @@ paths:
           description: Bad Request
         404:
           description: Not Found
+  /pets/petWithTreatments:
+    get:
+      summary: List all pets that went or go through treatments
+      operationId: getPetsWithTreatments
+      tags:
+        - Pets
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Pet"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
   /owners/owner:
     get:
       summary: List all owners

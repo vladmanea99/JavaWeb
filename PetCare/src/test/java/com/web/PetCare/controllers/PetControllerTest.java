@@ -87,6 +87,20 @@ public class PetControllerTest {
         verify(petService, times(1)).deletePet(any());
     }
 
+    @Test
+    public void getPetsWithTreatmentsTest() throws Exception {
+        when(petService.getPetsWithTreatments()).thenReturn(PET_DTO_LIST);
+
+        final MvcResult mvcResult = mockMvc.perform(get("/pets/petWithTreatments"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        final List<PetDTO> actualPetDtoList = Arrays.asList(objectMapper.readValue(mvcResult.getResponse().getContentAsString(), PetDTO[].class));
+        assertNotNull(actualPetDtoList);
+        assertEquals(2, actualPetDtoList.size());
+        verify(petService, times(1)).getPetsWithTreatments();
+    }
+
     private PetDTO defaultPetDto() {
         return new PetDTO()
                 .name("Aron")

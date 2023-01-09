@@ -17,7 +17,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-01-08T11:52:17.105346100+02:00[Europe/Bucharest]")
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-01-09T19:39:39.715469300+02:00[Europe/Bucharest]")
 @Validated
 @Api(value = "pets", description = "the pets API")
 public interface PetsApi {
@@ -98,6 +99,37 @@ public interface PetsApi {
         produces = { "application/json" }
     )
     default ResponseEntity<List<PetDTO>> getPets() {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"owner\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }, \"name\" : \"Aron\", \"id\" : 1, \"breed\" : { \"name\" : \"rottweiler\", \"description\" : \"Dog breed black and brown, seems vicious but are the best cuddlers\", \"id\" : 1 } }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /pets/petWithTreatments/ : List all pets that went or go through treatments
+     *
+     * @return Successful operation (status code 200)
+     *         or Bad Request (status code 400)
+     *         or Not Found (status code 404)
+     */
+    @ApiOperation(value = "List all pets that went or go through treatments", nickname = "getPetsWithTreatments", notes = "", response = PetDTO.class, responseContainer = "List", tags={ "Pets", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Successful operation", response = PetDTO.class, responseContainer = "List"),
+        @ApiResponse(code = 400, message = "Bad Request"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @GetMapping(
+        value = "/pets/petWithTreatments",
+        produces = { "application/json" }
+    )
+    default ResponseEntity<List<PetDTO>> getPetsWithTreatments() {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
