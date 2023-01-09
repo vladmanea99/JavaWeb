@@ -17,7 +17,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-01-08T11:52:17.105346100+02:00[Europe/Bucharest]")
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-01-09T19:56:27.154675400+02:00[Europe/Bucharest]")
 @Validated
 @Api(value = "owners", description = "the owners API")
 public interface OwnersApi {
@@ -98,6 +99,37 @@ public interface OwnersApi {
         produces = { "application/json" }
     )
     default ResponseEntity<List<OwnerDTO>> getOwners() {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /owners/ownersThatPaid : List all owners that have paid
+     *
+     * @return Successful operation (status code 200)
+     *         or Bad Request (status code 400)
+     *         or Not Found (status code 404)
+     */
+    @ApiOperation(value = "List all owners that have paid", nickname = "getOwnersThatPaid", notes = "", response = OwnerDTO.class, responseContainer = "List", tags={ "Owners", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Successful operation", response = OwnerDTO.class, responseContainer = "List"),
+        @ApiResponse(code = 400, message = "Bad Request"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @GetMapping(
+        value = "/owners/ownersThatPaid",
+        produces = { "application/json" }
+    )
+    default ResponseEntity<List<OwnerDTO>> getOwnersThatPaid() {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {

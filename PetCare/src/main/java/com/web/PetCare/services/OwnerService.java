@@ -35,4 +35,11 @@ public class OwnerService {
         ownerRepository.deleteById(id);
     }
 
+    public List<OwnerDTO> getOwnersThatPaid() {
+        return ownerRepository.getOwnersThatPaid()
+                .stream()
+                .map(ownerMapper::ownerToOwnerDto)
+                .collect(Collectors.toList());
+    }
+
 }

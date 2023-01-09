@@ -51,4 +51,10 @@ public class OwnersApiController implements OwnersApi {
         ownerService.deleteOwner(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @Override
+    public ResponseEntity<List<OwnerDTO>> getOwnersThatPaid() {
+        List<OwnerDTO> ownerDTOList = ownerService.getOwnersThatPaid();
+        return new ResponseEntity<>(ownerDTOList, HttpStatus.OK);
+    }
 }
