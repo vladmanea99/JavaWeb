@@ -82,6 +82,20 @@ public class TreatmentControllerTest {
         verify(treatmentService, times(1)).deleteTreatment(any());
     }
 
+    @Test
+    public void getListOfTreatmentsPerPetTest() throws Exception {
+        when(treatmentService.getTreatmentsPerPet(any())).thenReturn(TREATMENT_DTO_LIST);
+
+        final MvcResult mvcResult = mockMvc.perform(get("/treatments/allTreatmentsPet/1"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        final List<TreatmentDTO> actualTreatmentDtoList = Arrays.asList(objectMapper.readValue(mvcResult.getResponse().getContentAsString(), TreatmentDTO[].class));
+        assertNotNull(actualTreatmentDtoList);
+        assertEquals(2, actualTreatmentDtoList.size());
+        verify(treatmentService, times(1)).getTreatmentsPerPet(any());
+    }
+
     private static final List<TreatmentDTO> TREATMENT_DTO_LIST = ImmutableList.of(
             new TreatmentDTO(),
             new TreatmentDTO()

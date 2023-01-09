@@ -17,7 +17,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-01-08T11:52:17.105346100+02:00[Europe/Bucharest]")
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-01-09T19:22:19.308184900+02:00[Europe/Bucharest]")
 @Validated
 @Api(value = "treatments", description = "the treatments API")
 public interface TreatmentsApi {
@@ -98,6 +99,38 @@ public interface TreatmentsApi {
         produces = { "application/json" }
     )
     default ResponseEntity<List<TreatmentDTO>> getTreatments() {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"name\" : \"Returning to normal nails\", \"description\" : \"Long treatment of cutting nails little by little\", \"id\" : 1 }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /treatments/allTreatmentsPet/{petId} : List all treatments used on a pet
+     *
+     * @param petId  (required)
+     * @return Successful operation (status code 200)
+     *         or Bad Request (status code 400)
+     *         or Not Found (status code 404)
+     */
+    @ApiOperation(value = "List all treatments used on a pet", nickname = "getTreatmentsPerPet", notes = "", response = TreatmentDTO.class, responseContainer = "List", tags={ "Treatments", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Successful operation", response = TreatmentDTO.class, responseContainer = "List"),
+        @ApiResponse(code = 400, message = "Bad Request"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @GetMapping(
+        value = "/treatments/allTreatmentsPet/{petId}",
+        produces = { "application/json" }
+    )
+    default ResponseEntity<List<TreatmentDTO>> getTreatmentsPerPet(@ApiParam(value = "",required=true) @PathVariable("petId") Long petId) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
