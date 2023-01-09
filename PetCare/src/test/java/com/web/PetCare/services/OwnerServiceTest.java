@@ -79,6 +79,23 @@ public class OwnerServiceTest {
         verify(ownerRepository, times(1)).deleteById(any());
     }
 
+    @Test
+    public void getOwnersThatPaid() {
+        final List<OwnerDTO> ownerDTOList = OWNER_DTO_LIST;
+        final List<Owner> ownerList = OWNER_LIST;
+
+        when(ownerRepository.getOwnersThatPaid()).thenReturn(ownerList);
+        when(ownerMapper.ownerToOwnerDto(eq(ownerList.get(0)))).thenReturn(ownerDTOList.get(0));
+        when(ownerMapper.ownerToOwnerDto(eq(ownerList.get(1)))).thenReturn(ownerDTOList.get(1));
+
+        List<OwnerDTO> actualOwnerDtoList = ownerService.getOwnersThatPaid();
+
+        assertNotNull(actualOwnerDtoList);
+        assertEquals(2, actualOwnerDtoList.size());
+        assertEquals(ownerDTOList.get(0).getId(), actualOwnerDtoList.get(0).getId());
+        assertEquals(ownerDTOList.get(1).getId(), actualOwnerDtoList.get(1).getId());
+    }
+
     private OwnerDTO defaultEntryOwnerDto() {
         return new OwnerDTO().firstName("John").lastName("Doe");
     }

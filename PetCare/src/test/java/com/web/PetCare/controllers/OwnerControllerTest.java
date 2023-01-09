@@ -101,6 +101,19 @@ public class OwnerControllerTest {
             new OwnerDTO()
     );
 
+    @Test
+    public void getOwnersThatPaidTest() throws Exception {
+        when(ownerService.getOwnersThatPaid()).thenReturn(OWNER_DTO_LIST);
+
+        final MvcResult mvcResult = mockMvc.perform(get("/owners/ownersThatPaid"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        final List<OwnerDTO> actualOwnerDtoList = Arrays.asList(objectMapper.readValue(mvcResult.getResponse().getContentAsString(), OwnerDTO[].class));
+        assertNotNull(actualOwnerDtoList);
+        assertEquals(2,actualOwnerDtoList.size());
+        verify(ownerService, times(1)).getOwnersThatPaid();
+    }
 
     private OwnerDTO defaultOwnerDto() {
         return new OwnerDTO().firstName("John").lastName("Doe");

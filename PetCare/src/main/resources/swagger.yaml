@@ -143,6 +143,25 @@ paths:
           description: Bad Request
         404:
           description: Not Found
+  /owners/ownersThatPaid:
+    get:
+      summary: List all owners that have paid
+      operationId: getOwnersThatPaid
+      tags:
+        - Owners
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Owner"
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
   /treatments/treatment:
     get:
       summary: List all treatments
