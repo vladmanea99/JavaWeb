@@ -17,7 +17,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-01-08T11:52:17.105346100+02:00[Europe/Bucharest]")
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-01-09T20:41:55.130386800+02:00[Europe/Bucharest]")
 @Validated
 @Api(value = "sessions", description = "the sessions API")
 public interface SessionsApi {
@@ -98,6 +99,37 @@ public interface SessionsApi {
         produces = { "application/json" }
     )
     default ResponseEntity<List<SessionDTO>> getSessions() {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"treatment\" : { \"name\" : \"Returning to normal nails\", \"description\" : \"Long treatment of cutting nails little by little\", \"id\" : 1 }, \"sessionDate\" : \"2000-01-23T04:56:07.000+00:00\", \"id\" : 1, \"pet\" : { \"owner\" : { \"firstName\" : \"John\", \"lastName\" : \"Doe\", \"id\" : 1 }, \"name\" : \"Aron\", \"id\" : 1, \"breed\" : { \"name\" : \"rottweiler\", \"description\" : \"Dog breed black and brown, seems vicious but are the best cuddlers\", \"id\" : 1 } } }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /sessions/sessionsPaid : List all sessions that got paid
+     *
+     * @return Successful operation (status code 200)
+     *         or Bad Request (status code 400)
+     *         or Not Found (status code 404)
+     */
+    @ApiOperation(value = "List all sessions that got paid", nickname = "getSessionsThatGotPaid", notes = "", response = SessionDTO.class, responseContainer = "List", tags={ "Sessions", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Successful operation", response = SessionDTO.class, responseContainer = "List"),
+        @ApiResponse(code = 400, message = "Bad Request"),
+        @ApiResponse(code = 404, message = "Not Found") })
+    @GetMapping(
+        value = "/sessions/sessionsPaid",
+        produces = { "application/json" }
+    )
+    default ResponseEntity<List<SessionDTO>> getSessionsThatGotPaid() {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {

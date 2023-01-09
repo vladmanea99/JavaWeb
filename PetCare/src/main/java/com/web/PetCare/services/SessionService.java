@@ -40,4 +40,11 @@ public class SessionService {
     public void deleteSession(Long id) {
         sessionRepository.deleteById(id);
     }
+
+    public List<SessionDTO> getSessionsThatGotPaid() {
+        return sessionRepository.getSessionsThatGotPaid()
+                .stream()
+                .map(sessionMapper::sessionToSessionDto)
+                .collect(Collectors.toList());
+    }
 }

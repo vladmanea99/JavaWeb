@@ -103,6 +103,20 @@ public class SessionControllerTest {
                         .description(null));
     }
 
+    @Test
+    public void getListOfSessionsThatGotPaidTest() throws Exception {
+        when(sessionService.getSessionsThatGotPaid()).thenReturn(SESSION_DTO_LIST);
+
+        final MvcResult mvcResult = mockMvc.perform(get("/sessions/sessionsPaid"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        final List<SessionDTO> actualSessionDtoList = Arrays.asList(objectMapper.readValue(mvcResult.getResponse().getContentAsString(), SessionDTO[].class));
+        assertNotNull(actualSessionDtoList);
+        assertEquals(2, actualSessionDtoList.size());
+        verify(sessionService, times(1)).getSessionsThatGotPaid();
+    }
+
     private static final List<SessionDTO> SESSION_DTO_LIST = ImmutableList.of(
             new SessionDTO(),
             new SessionDTO()
